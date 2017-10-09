@@ -5,44 +5,48 @@
             <img src="../../../images/add_address.png" height="24" width="24">
             <span>新增收货地址</span>
         </router-link>
-        <ul class="deliverable_address">
-            <li v-for="(item,index) in deliverable" @click="chooseAddress(item, index)">
-                <svg class="choosed_address" :class="{default_address: defaultIndex == index}">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select"></use>
-                </svg>
-                <div>
-                    <header>
-                        <span>{{item.name}}</span>
-                        <span>{{item.sex == 1? '先生' : '女士'}}</span>
-                        <span>{{item.phone}}</span>   
-                    </header>
-                    <div class="address_detail ellipsis">
-                        <span v-if="item.tag" :style="{backgroundColor: iconColor(item.tag)}">{{item.tag}}</span>
-                        <p>{{item.address_detail}}</p>   
-                    </div>
-                </div>
-            </li>
-        </ul>
-        <section id="out_delivery" v-if="deliverdisable.length">
-            <header class="out_header">以下地址超出配送范围</header>
-            <ul class="deliverable_address">
-                <li v-for="(item,index) in deliverdisable">
-                    <svg class="choosed_address">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select"></use>
-                    </svg>
-                    <div>
-                        <header>
-                            <span>{{item.name}}</span>
-                            <span>{{item.sex == 1? '先生' : '女士'}}</span>
-                            <span>{{item.phone}}</span>   
-                        </header>
-                        <div class="address_detail ellipsis">
-                            <span v-if="item.tag" :style="{backgroundColor: '#ccc'}">{{item.tag}}</span>
-                            <p>{{item.address_detail}}</p>   
+        <section id="scroll_section" class="scroll_container">
+            <section class="list_cotainer">
+                <ul class="deliverable_address">
+                    <li v-for="(item,index) in deliverable" @click.prevent.stop="chooseAddress(item, index)">
+                        <svg class="choosed_address" :class="{default_address: defaultIndex == index}">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select"></use>
+                        </svg>
+                        <div>
+                            <header>
+                                <span>{{item.name}}</span>
+                                <span>{{item.sex == 1? '先生' : '女士'}}</span>
+                                <span>{{item.phone}}</span>   
+                            </header>
+                            <div class="address_detail ellipsis">
+                                <span v-if="item.tag" :style="{backgroundColor: iconColor(item.tag)}">{{item.tag}}</span>
+                                <p>{{item.address_detail}}</p>   
+                            </div>
                         </div>
-                    </div>
-                </li>
-            </ul>
+                    </li>
+                </ul>
+                <section id="out_delivery" v-if="deliverdisable.length">
+                    <header class="out_header">以下地址超出配送范围</header>
+                    <ul class="deliverable_address">
+                        <li v-for="(item,index) in deliverdisable">
+                            <svg class="choosed_address">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select"></use>
+                            </svg>
+                            <div>
+                                <header>
+                                    <span>{{item.name}}</span>
+                                    <span>{{item.sex == 1? '先生' : '女士'}}</span>
+                                    <span>{{item.phone}}</span>   
+                                </header>
+                                <div class="address_detail ellipsis">
+                                    <span v-if="item.tag" :style="{backgroundColor: '#ccc', color: '#fff'}">{{item.tag}}</span>
+                                    <p>{{item.address_detail}}</p>   
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </section>
         </section>
         <alert-tip v-if="showAlert" @closeTip="showAlert = false" :alertText="alertText"></alert-tip>
         <transition name="router-slid" mode="out-in">
@@ -54,8 +58,9 @@
 <script>
     import headTop from 'src/components/header/head'
     import {mapState, mapMutations} from 'vuex'
-    import {getAddress} from 'src/service/getData'
+    import {getAddress, getAddressList} from 'src/service/getData'
     import alertTip from 'src/components/common/alertTip'
+    import BScroll from 'better-scroll'
 
     export default {
       data(){
@@ -72,7 +77,6 @@
         created(){
             this.id = this.$route.query.id;
             this.sig = this.$route.query.sig;
-            this.initData();
         },
         components: {
             headTop,
@@ -101,8 +105,9 @@
                 this.addressList = [];
                 this.deliverable = [];
                 this.deliverdisable = [];
+
                 if (this.userInfo && this.userInfo.user_id) {
-                    this.addressList = await getAddress(this.id, this.sig);
+                    this.addressList = await getAddressList(this.userInfo.user_id);
                     //将当前所有地址访问有效无效两种
                     this.addressList.forEach(item => {
                         if (item.is_deliverable) {
@@ -110,8 +115,14 @@
                         }else{
                             this.deliverdisable.push(item);
                         }
-                        
                     })
+                    // this.$nextTick(() => {
+                    //     new BScroll('#scroll_section', {  
+                    //         deceleration: 0.003,
+                    //         bounce: true,
+                    //         swipeTime: 1800,
+                    //     }); 
+                    // })
                 }
             },
             iconColor(name){
@@ -134,7 +145,6 @@
             },
             newAddress: function (value) {
                 this.initData();
-                console.log(11111)
             },
         }
     }
@@ -149,12 +159,24 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: #f5f5f5;
-        z-index: 204;
+        background-color: #fff;
+        z-index: 202;
         padding-top: 1.95rem;
         p, span{
             font-family: Helvetica Neue,Tahoma,Arial;
         }
+    }
+    .scroll_container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding-top: 1.95rem;
+        overflow-y: auto;
+    }
+    .list_cotainer{
+        padding-bottom: 5rem;
     }
     .add_icon_footer{
         position: fixed;
@@ -220,6 +242,7 @@
             @include sc(.6rem, #666);
             line-height: 1.5rem;
             padding-left: .5rem;
+            background-color: #f5f5f5;
         }
         *{
             color: #ccc;

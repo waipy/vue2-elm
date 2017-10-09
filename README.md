@@ -15,16 +15,14 @@
 __注：此项目纯属个人瞎搞，正常下单请选择饿了么官方客户端。__
 
 
-
-
 ## 技术栈
+
 vue2 + vuex + vue-router + webpack + ES6/7 + fetch + sass + flex + svg
 
 
+## 项目运行
 
-# 项目运行
-
-#### 注意：由于涉及大量的 ES6/7 等新属性，nodejs 必须是 6.0 以上版本 ，node 7 是先行版，有可能会出问题，建议使用 node 6 稳定版
+#### 注意：由于涉及大量的 ES6/7 等新属性，node 需要 6.0 以上版本 
 
 ```
 git clone https://github.com/bailicangdu/vue2-elm.git  
@@ -33,64 +31,51 @@ cd vue2-elm
 
 npm install
 
-```
-
-### 编译环境
-```
 npm run dev
 
-访问 http://localhost:8088
 ```
+## 另外
+此项目有配套的后台系统，如果想前后台同时开发，可以下载对应的后台系统：[后台项目传送地址](https://github.com/bailicangdu/node-elm)。
 
+此时启动项目使用：npm run local 而不是 npm run dev。
 
-### 线上版本
-```
-npm run build
-
-生成的elm文件夹放在服务器即可正常访问
-```
-
-
+如果只做前端开发，请忽略这句话。
 
 
 # 说明
-
->  本项目主要用于熟悉如何用 vue2 架构一个大型项目
 
 >  如果对您有帮助，您可以点右上角 "Star" 支持一下 谢谢！ ^_^
 
 >  或者您可以 "follow" 一下，我会不断开源更多的有趣的项目
 
->  开发环境 macOS 10.12.3  Chrome 55
+>  开发环境 macOS 10.12.3  Chrome 56  nodejs 6.10.0
 
->  特别感谢辰妹子，在百忙之中抽出时间和我一起完成了这个项目，辛苦了🌹
+>  特别感谢辰妹子[@bailichen](https://github.com/bailichen)，在百忙之中抽出时间和我一起完成了这个项目，辛苦了🌹
 
 >  如有问题请直接在 Issues 中提，或者您发现问题并有非常好的解决方案，欢迎 PR 👍
+
+>  项目交流群：528447162(QQ)
 
 >  推荐一个 react + redux 开源项目，对react感兴趣的朋友赶紧去看看。[地址在这里](https://github.com/bailicangdu/react-pxq)
 
 >  另外一个 vue2 + vuex 的入门项目，比当前的项目简单很多，非常适合入门练习。[地址在这里](https://github.com/bailicangdu/vue2-happyfri)
 
 
+## 关于 数据接口 的说明🤔
 
-# 关于 demo 与 数据 的说明🤔
+### 2017-05-30
 
-1、下载代码运行后，因为开启了反向代理，可以获取真实的官方数据，最终可以进行下单(真实的下单，而不是模拟，下单后可以在官方App中查看并付款，亲自试过，且成功付款点餐)，但是为了安全起见，登录的帐号为固定的帐号，以免泄露个人信息，不过照样可以点餐。
-
-2、demo的数据为模拟的固定数据，只做为效果演示，因为反向代理必须在PC端运行代码才行。
+由于一些原因，以前的数据接口无法使用，导致项目无法正常运行。以后改用nodejs构建的[后台系统](https://github.com/bailicangdu/node-elm)接口，数据接口的格式保持了和官网的一致。并提供对应的[后台管理系统](https://github.com/bailicangdu/vue2-manage)
 
 
-## 效果演示
 
-#### (demo使用的是模拟数据，数据是固定的，只做为样式的演示，要获取真实的数据，请clone代码并运行);
+# 效果演示
 
-[查看demo请戳这里](http://test.fe.ptdev.cn/elm/)（请用chrome手机模式预览）
+[查看demo请戳这里](http://cangdu.org:8001/)（请用chrome手机模式预览）
 
 ### 移动端扫描下方二维码
 
-![](https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/elm_ewm.png)
-
-
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/ewm.png" width="250" height="250"/>
 
 
 
@@ -140,11 +125,11 @@ npm run build
 
 # 最终目标
 
-1、用node.js构建一个模拟外卖平台的后台系统。(已经开始制作)
+1、用node.js构建一个模拟外卖平台的后台系统。[地址在这里](https://github.com/bailicangdu/node-elm)
 
-2、利用 react-native 写出跨 Android 和 IOS 的原生APP版本。
+2、利用 react-native 写出跨 Android 和 IOS 的原生APP版本。[地址在这里](https://github.com/bailicangdu/React-Native-elm)
 
-3、如果时间来的及，会出一个pc端的网页版。
+3、如果时间来的及，会出一卖家版本。
 
 所以我的目的是构建一个横跨前后端，移动IOS、Android的完整生态圈。
 
@@ -158,44 +143,37 @@ npm run build
 
 ### 商铺列表页
 
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/msite.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/msite.gif" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/msite.png" width="365" height="619"/> <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/msite.gif" width="365" height="619"/>
 
 
 ### 商铺筛选页
 
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/food.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/food.gif" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/food.png" width="365" height="619"/> <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/food.gif" width="365" height="619"/>
 
 
 
 ### 餐馆食品列表与购物车
 
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shop_cart.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shop_cart.gif" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shop_cart.png" width="365" height="619"/> <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shop_cart.gif" width="365" height="619"/>
 
 ### 确认订单页
 
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/confirm1.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/confirmOrder.gif" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/confirm1.png" width="365" height="619"/> <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/confirmOrder.gif" width="365" height="619"/>
 
 
 ### 搜索页
 
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/search.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/search.gif" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/search.png" width="365" height="619"/> <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/search.gif" width="365" height="619"/>
 
 
 ### 登录页
 
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/login1.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/login.gif" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/login1.png" width="365" height="619"/> <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/login.gif" width="365" height="619"/>
 
 
 ### 个人中心
 
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/profile.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/profile.gif" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/profile.png" width="365" height="619"/> <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/profile.gif" width="365" height="619"/>
 
 
 
@@ -203,122 +181,139 @@ npm run build
 
 
 # 项目布局
+
 ```
-|-- build                            // webpack配置文件
-|-- config                           // 项目打包路径
-|-- elm                           	 // 上线项目文件，放在服务器即可正常访问
-|-- screenshots                      // 项目截图
-|-- src                              // 源码目录
-|   |-- components                   // 组件
-|       |-- common                   // 公共组件
-|			|-- buyCart.js           // 购物车组件
-|			|-- loading.js           // 页面初始化加载数据的动画组件
-|			|-- mixin.js             // 组件混合(包括：指令-下拉加载更多，处理图片地址)
-|			|-- ratingStar.js        // 评论的五颗星组件
-|			|-- shoplist.js          // msite和shop页面的餐馆列表公共组件
-|       |-- footer                   // 底部公共组件
-|       |-- header                 	 // 头部公共组件
-|   |-- config                       // 基本配置
-|       |-- env.js                   // 环境切换配置
-|       |-- fetch.js                 // 获取数据
-|       |-- mUtils.js                // 常用的js方法
-|       |-- rem.js                   // px转换rem
-|   |-- images                       // 公共图片
-|   |-- pages
-|       |-- balance                  // 余额页
-|		  	|--children
-|				|--detail			 //	余额说明
-|       |-- benefit                  // 红包页
-|		  |--children
-|			|--commend			     //	推荐有奖
-|			|--coupon			     //	代金券说明
-|			|--exchange			     //	兑换红包
-|			|--hbDescription		 //	红包说明
-|			|--hbHistory			 //	历史红包
-|       |-- city                     // 当前城市页
-|		|-- food                 	 // 食品筛选排序页
-|		|-- confirmOrder             // 确认订单页
-|		  |--children
-|			|--invoice			     //	选择发票页
-|			|--remark			     //	订单备注页
-|			|--payment			     //	付款页
-|			|--userValidation		 //	用户验证页
-|			|--chooseAddress         //	选择地址页
-|		      |--children
-|				|--addAddress        //	添加地址页
-|				  |--children
-|					|--searchAddress // 搜索地址页
-|       |-- download                 // 下载App
-|       |-- find                     // 发现页
-|       |-- forget                   // 忘记密码，修改密码页
-|       |-- home                     // 首页
-|       |-- login                    // 登录注册页
-|       |-- msite                    // 商铺列表页
-|       |-- order                    // 订单列表页
-|			|--children
-|				|--orderDetail		 // 订单详情页
-|       |-- points                   // 积分页
-|		  	|--children
-|				|--detail			 //	积分说明
-|       |-- profile                  // 个人中心
-|			|--children
-|				|--balance			 // 我的余额
-|				|--benefit			 // 我的优惠
-|				|--info				 // 帐户信息
-|		          |--children
-|				    |--address       // 添加地址
-|		              |--children
-|				        |--add       // 新增地址
-|		                  |--children
-|				            |--addDetail// 搜索地址
-|				|--points			 // 我的积分
-|				|--setusername	     // 重置用户名
-|       |-- search                   // 搜索页
-|		|--service			         // 服务中心
-|			|--children
-|				|--questionDetail    // 问题详情
-|       |-- shop                     // 商铺筛选页
-|			|-- children
-|			  	|-- foodDetail       // 商铺信息页
-|			  	|-- shopDetail       // 单个商铺信息页
-|					|-- children
-|				  		|-- shopSafe // 商铺认证信息页
-|       |-- vipcard                  // 会员卡办理页
-|			|-- children
-|			  	|-- invoiceRecord    // 购买记录
-|			  	|-- useCart          // 使用卡号购买
-|			  	|-- vipDescription   // 会员说明
-|
-|   |-- plugins                      // 引用的插件
-|
-|   |-- router                       // 路由配置
-|
-|   |-- service                      // 数据交互统一调配
-|		|-- template                 // 开发阶段的临时数据
-|		|-- getData.js               // 获取数据的统一调配文件，对接口进行统一管理
-|
-|   |-- store                        // vuex的状态管理
-|       |-- modules                  // store模块
-|       |-- action.js                // 配置actions
-|       |-- getters.js               // 配置getters
-|       |-- index.js                 // 引用vuex，创建store
-|       |-- mutation-types.js        // 定义常量muations名
-|       |-- mutations.js             // 配置mutations
-|
-|   |-- style                        // 各种样式文件
-|       |-- common.scss              // 公共样式文件
-|       |-- mixin.scss               // 样式配置文件
-|
-|   |-- App.vue                      // 页面入口文件
-|
-|   |-- main.js                      // 程序入口文件，加载各种公共组件
-|
-|-- .babelrc                         // ES6语法编译配置
-|-- .editorconfig                    // 代码编写规格
-|-- .gitignore                       // 忽略的文件
-|-- favicon.ico                      // 页面左上角小图标
-|-- index.html                       // 入口html文件
-|-- package.json                     // 项目及工具的依赖配置文件
-|-- README.md                        // 说明
+.
+├── build                                       // webpack配置文件
+├── config                                      // 项目打包路径
+├── elm                                         // 上线项目文件，放在服务器即可正常访问
+├── screenshots                                 // 项目截图
+├── src                                         // 源码目录
+│   ├── components                              // 组件
+│   │   ├── common                              // 公共组件
+│   │   │   ├── alertTip.vue                    // 弹出框组件
+│   │   │   ├── buyCart.vue                     // 购物车组件
+│   │   │   ├── computeTime.vue                 // 倒计时组件
+│   │   │   ├── loading.vue                     // 页面初始化加载数据的动画组件
+│   │   │   ├── mixin.js                        // 组件混合(包括：指令-下拉加载更多，处理图片地址)
+│   │   │   ├── ratingStar.vue                  // 评论的五颗星组件
+│   │   │   └── shoplist.vue                    // msite和shop页面的餐馆列表公共组件
+│   │   ├── footer
+│   │   │   └── footGuide.vue                   // 底部公共组件
+│   │   └── header
+│   │       └── head.vue                        // 头部公共组件
+│   ├── config                                  // 基本配置
+│   │   ├── env.js                              // 环境切换配置
+│   │   ├── fetch.js                            // 获取数据
+│   │   ├── mUtils.js                           // 常用的js方法
+│   │   └── rem.js                              // px转换rem
+│   ├── images                                  // 公共图片
+│   ├── page
+│   │   ├── balance
+│   │   │   ├── balance.vue                     // 余额页
+│   │   │   └── children
+│   │   │       └── detail.vue                  // 余额说明
+│   │   ├── benefit
+│   │   │   ├── benefit.vue                     // 红包页
+│   │   │   └── children
+│   │   │       ├── commend.vue                 // 推荐有奖
+│   │   │       ├── coupon.vue                  // 代金券说明
+│   │   │       ├── exchange.vue                // 兑换红包
+│   │   │       ├── hbDescription.vue           // 红包说明
+│   │   │       └── hbHistory.vue               // 历史红包
+│   │   ├── city                 
+│   │   │   └── city.vue                        // 当前城市页
+│   │   ├── confirmOrder
+│   │   │   ├── children
+│   │   │   │   ├── children
+│   │   │   │   │   ├── addAddress.vue          // 添加地址页
+│   │   │   │   │   └── children
+│   │   │   │   │       └── searchAddress.vue   // 搜索地址页
+│   │   │   │   ├── chooseAddress.vue           // 选择地址页
+│   │   │   │   ├── invoice.vue                 // 选择发票页
+│   │   │   │   ├── payment.vue                 // 付款页
+│   │   │   │   ├── remark.vue                  // 订单备注页 
+│   │   │   │   └── userValidation.vue          // 用户验证页
+│   │   │   └── confirmOrder.vue                // 确认订单页
+│   │   ├── download
+│   │   │   └── download.vue                    // 下载App
+│   │   ├── find
+│   │   │   └── find.vue                        // 发现页
+│   │   ├── food
+│   │   │   └── food.vue                        // 食品筛选排序页
+│   │   ├── forget
+│   │   │   └── forget.vue                      // 忘记密码，修改密码页
+│   │   ├── home
+│   │   │   └── home.vue                        // 首页
+│   │   ├── login
+│   │   │   └── login.vue                       // 登录注册页
+│   │   ├── msite
+│   │   │   └── msite.vue                       // 商铺列表页
+│   │   ├── order
+│   │   │   ├── children
+│   │   │   │   └── orderDetail.vue             // 订单详情页
+│   │   │   └── order.vue                       // 订单列表页
+│   │   ├── points
+│   │   │   ├── children
+│   │   │   │   └── detail.vue                  // 积分说明
+│   │   │   └── points.vue                      // 积分页
+│   │   ├── profile
+│   │   │   ├── children
+│   │   │   │   ├── children
+│   │   │   │   │   ├── address.vue             // 添加地址
+│   │   │   │   │   └── children
+│   │   │   │   │       ├── add.vue             // 新增地址
+│   │   │   │   │       └── children
+│   │   │   │   │           └── addDetail.vue   // 搜索地址
+│   │   │   │   ├── info.vue                    // 帐户信息
+│   │   │   │   └── setusername.vue             // 重置用户名
+│   │   │   └── profile.vue                     // 个人中心
+│   │   ├── search
+│   │   │   └── search.vue                      // 搜索页
+│   │   ├── service
+│   │   │   ├── children
+│   │   │   │   └── questionDetail.vue          // 问题详情
+│   │   │   └── service.vue                     // 服务中心
+│   │   ├── shop
+│   │   │   ├── children
+│   │   │   │   ├── children
+│   │   │   │   │   └── shopSafe.vue            // 商铺认证信息页
+│   │   │   │   ├── foodDetail.vue              // 商铺信息页
+│   │   │   │   └── shopDetail.vue              // 单个商铺信息页
+│   │   │   └── shop.vue                        // 商铺筛选页
+│   │   └── vipcard
+│   │       ├── children
+│   │       │   ├── invoiceRecord.vue           // 购买记录
+│   │       │   ├── useCart.vue                 // 使用卡号购买
+│   │       │   └── vipDescription.vue          // 会员说明
+│   │       └── vipcard.vue                     // 会员卡办理页
+│   ├── plugins                                 // 引用的插件
+│   ├── router
+│   │   └── router.js                           // 路由配置
+│   ├── service                                 // 数据交互统一调配
+│   │   ├── getData.js                          // 获取数据的统一调配文件，对接口进行统一管理
+│   │   └── tempdata                            // 开发阶段的临时数据
+│   ├── store                                   // vuex的状态管理
+│   │   ├── action.js                           // 配置actions
+│   │   ├── getters.js                          // 配置getters
+│   │   ├── index.js                            // 引用vuex，创建store
+│   │   ├── modules                             // store模块
+│   │   ├── mutation-types.js                   // 定义常量muations名
+│   │   └── mutations.js                        // 配置mutations
+│   └── style
+│       ├── common.scss                         // 公共样式文件
+│       ├── mixin.scss                          // 样式配置文件
+│       └── swiper.min.css
+│   ├── App.vue                                 // 页面入口文件
+│   ├── main.js                                 // 程序入口文件，加载各种公共组件
+├── favicon.ico                                 // 图标
+├── index.html                                  // 入口html文件
+.
+
+56 directories, 203 files
 ```
 
+
+# License
+
+[GPL](https://github.com/bailicangdu/vue2-elm/blob/master/COPYING)

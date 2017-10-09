@@ -30,10 +30,9 @@ import {
 	BUY_CART,
 } from './mutation-types.js'
 
-import {
-	setStore,
-	getStore,
-} from '../config/mUtils'
+import {setStore, getStore} from '../config/mUtils'
+
+import {localapi, proapi} from 'src/config/env'
 
 export default {
 	// 记录当前经度纬度
@@ -62,54 +61,22 @@ export default {
 		stock
 	}) {
 		let cart = state.cartList;
-		if (cart[shopid] && cart[shopid][category_id] && cart[shopid][category_id][item_id] && cart[shopid][category_id][item_id][food_id]) {
-			cart[shopid][category_id][item_id][food_id]['num']++;
-		} else if (cart[shopid] && cart[shopid][category_id] && cart[shopid][category_id][item_id]) {
-			cart[shopid][category_id][item_id][food_id] = {};
-			cart[shopid][category_id][item_id][food_id]['num'] = 1;
-			cart[shopid][category_id][item_id][food_id]['id'] = food_id;
-			cart[shopid][category_id][item_id][food_id]['name'] = name;
-			cart[shopid][category_id][item_id][food_id]['price'] = price;
-			cart[shopid][category_id][item_id][food_id]['specs'] = specs;
-			cart[shopid][category_id][item_id][food_id]['packing_fee'] = packing_fee;
-			cart[shopid][category_id][item_id][food_id]['sku_id'] = sku_id;
-			cart[shopid][category_id][item_id][food_id]['stock'] = stock;
-		} else if (cart[shopid] && cart[shopid][category_id]) {
-			cart[shopid][category_id][item_id] = {};
-			cart[shopid][category_id][item_id][food_id] = {};
-			cart[shopid][category_id][item_id][food_id]['num'] = 1;
-			cart[shopid][category_id][item_id][food_id]['id'] = food_id;
-			cart[shopid][category_id][item_id][food_id]['name'] = name;
-			cart[shopid][category_id][item_id][food_id]['price'] = price;
-			cart[shopid][category_id][item_id][food_id]['specs'] = specs;
-			cart[shopid][category_id][item_id][food_id]['packing_fee'] = packing_fee;
-			cart[shopid][category_id][item_id][food_id]['sku_id'] = sku_id;
-			cart[shopid][category_id][item_id][food_id]['stock'] = stock;
-		} else if (cart[shopid]) {
-			cart[shopid][category_id] = {};
-			cart[shopid][category_id][item_id] = {};
-			cart[shopid][category_id][item_id][food_id] = {};
-			cart[shopid][category_id][item_id][food_id]['num'] = 1;
-			cart[shopid][category_id][item_id][food_id]['id'] = food_id;
-			cart[shopid][category_id][item_id][food_id]['name'] = name;
-			cart[shopid][category_id][item_id][food_id]['price'] = price;
-			cart[shopid][category_id][item_id][food_id]['specs'] = specs;
-			cart[shopid][category_id][item_id][food_id]['packing_fee'] = packing_fee;
-			cart[shopid][category_id][item_id][food_id]['sku_id'] = sku_id;
-			cart[shopid][category_id][item_id][food_id]['stock'] = stock;
+		let shop = cart[shopid] = (cart[shopid] || {});
+		let category = shop[category_id] = (shop[category_id] || {});
+		let item = category[item_id] = (category[item_id] || {});
+		if (item[food_id]) {
+			item[food_id]['num']++;
 		} else {
-			cart[shopid] = {};
-			cart[shopid][category_id] = {};
-			cart[shopid][category_id][item_id] = {};
-			cart[shopid][category_id][item_id][food_id] = {};
-			cart[shopid][category_id][item_id][food_id]['num'] = 1;
-			cart[shopid][category_id][item_id][food_id]['id'] = food_id;
-			cart[shopid][category_id][item_id][food_id]['name'] = name;
-			cart[shopid][category_id][item_id][food_id]['price'] = price;
-			cart[shopid][category_id][item_id][food_id]['specs'] = specs;
-			cart[shopid][category_id][item_id][food_id]['packing_fee'] = packing_fee;
-			cart[shopid][category_id][item_id][food_id]['sku_id'] = sku_id;
-			cart[shopid][category_id][item_id][food_id]['stock'] = stock;
+			item[food_id] = {
+					"num" : 1,
+					"id" : food_id,
+					"name" : name,
+					"price" : price,
+					"specs" : specs,
+					"packing_fee" : packing_fee,
+					"sku_id" : sku_id,
+					"stock" : stock
+			};
 		}
 		state.cartList = {...cart};
 		//存入localStorage
@@ -126,15 +93,18 @@ export default {
 		specs,
 	}) {
 		let cart = state.cartList;
-		if (cart[shopid] && cart[shopid][category_id] && cart[shopid][category_id][item_id] && cart[shopid][category_id][item_id][food_id]) {
-			if (cart[shopid][category_id][item_id][food_id]['num'] > 0) {
-				cart[shopid][category_id][item_id][food_id]['num']--;
+		let shop = (cart[shopid] || {});
+		let category = (shop[category_id] || {});
+		let item = (category[item_id] || {});
+		if (item && item[food_id]) {
+			if (item[food_id]['num'] > 0) {
+				item[food_id]['num']--;
 				state.cartList = {...cart};
 				//存入localStorage
 				setStore('buyCart', state.cartList);
 			} else {
 				//商品数量为0，则清空当前商品的信息
-				cart[shopid][category_id][item_id][food_id] = null;
+				item[food_id] = null;
 			}
 		}
 	},
@@ -155,11 +125,7 @@ export default {
 	[RECORD_USERINFO](state, info) {
 		state.userInfo = info;
 		state.login = true;
-		let validity = 30;
-		let now = new Date();
-		now.setTime(now.getTime() + validity * 24 * 60 * 60 * 1000);
-		document.cookie = "USERID=" + info.user_id + ";expires=" + now.toGMTString();
-		document.cookie = "SID=huRyTRd9QLij7NkbpHJoj3PQrx1eRiO6bAiw" + ";expires=" + now.toGMTString();
+		setStore('user_id', info.user_id);
 	},
 	//获取用户信息存入vuex
 	[GET_USERINFO](state, info) {
@@ -171,11 +137,6 @@ export default {
 		}
 		if (!info.message) {
 			state.userInfo = {...info};
-			let validity = 30;
-			let now = new Date();
-			now.setTime(now.getTime() + validity * 24 * 60 * 60 * 1000);
-			document.cookie = "USERID=" + info.user_id + ";expires=" + now.toGMTString();
-			document.cookie = "SID=huRyTRd9QLij7NkbpHJoj3PQrx1eRiO6bAiw" + ";expires=" + now.toGMTString();
 		} else {
 			state.userInfo = null;
 		}
@@ -207,7 +168,7 @@ export default {
 	//保存geohash
 	[SAVE_GEOHASH](state, geohash) {
 		state.geohash = geohash;
-		if (true) {}
+		
 	},
 	//确认订单页添加新的的地址
 	[CONFIRM_ADDRESS](state, newAddress) {
@@ -252,7 +213,7 @@ export default {
 	},
 	//退出登录
 	[OUT_LOGIN](state) {
-		state.userInfo = null;
+		state.userInfo = {};
 		state.login = false;
 	},
 	//保存图片
